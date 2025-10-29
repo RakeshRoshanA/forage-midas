@@ -1,0 +1,21 @@
+general:
+  kafka-topic: midas-transactions
+
+spring:
+  kafka:
+    # Producer (Sender) settings
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    
+    # Consumer (Receiver) settings
+    consumer:
+      # This is the new setting we are adding
+      auto-offset-reset: earliest
+      
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.jpmc.midascore,com.jpmc.midascore.foundation
+        spring.json.value.default.type: com.jpmc.midascore.foundation.Transaction
+
+server:
+  port: 33400

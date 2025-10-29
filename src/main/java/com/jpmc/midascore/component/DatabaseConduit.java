@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DatabaseConduit {
+
     private final UserRepository userRepository;
 
     public DatabaseConduit(UserRepository userRepository) {
@@ -16,4 +17,9 @@ public class DatabaseConduit {
         userRepository.save(userRecord);
     }
 
+    // This is the new method we are adding
+    // It allows other classes (like our test) to find users.
+    public UserRecord findUserByName(String name) {
+        return userRepository.findByName(name);
+    }
 }
